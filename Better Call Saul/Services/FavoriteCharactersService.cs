@@ -23,11 +23,12 @@ public static class FavoriteCharactersService
 
         while (dataReader.Read())
         {
+            int id = (int)dataReader.GetValue(0);
             string fname = (string)dataReader.GetValue(1);
             string sname = (string)dataReader.GetValue(2);
-            string gender = (string)dataReader.GetValue(3);
             FavoriteCharacter c = new()
             {
+                Id = id,
                 FirstName = fname,
                 LastName = sname
             };
@@ -43,7 +44,7 @@ public static class FavoriteCharactersService
     {
         SqlConnection conn = new(constr);
         conn.Open();
-        string sql = $"Select * from Characters where ID = {id}";
+        string sql = $"Select * from FavoriteCharacters where ID = {id}";
         Console.WriteLine(sql);
         SqlCommand cmd = new(sql, conn);
         SqlDataReader dataReader = cmd.ExecuteReader();
@@ -52,9 +53,9 @@ public static class FavoriteCharactersService
         {
             string fname = (string)dataReader.GetValue(1);
             string sname = (string)dataReader.GetValue(2);
-            string gender = (string)dataReader.GetValue(3);
             FavoriteCharacter c = new FavoriteCharacter
             {
+                Id = id,
                 FirstName = fname,
                 LastName = sname
             };

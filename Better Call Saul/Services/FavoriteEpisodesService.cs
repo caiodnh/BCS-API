@@ -24,11 +24,13 @@ public static class FavoriteEpisodesService
 
         while (dataReader.Read())
         {
+            int id = (int)dataReader.GetValue(0);
             int season = (int)dataReader.GetValue(1);
             int ep = (int)dataReader.GetValue(2);
             string name = (string)dataReader.GetValue(3);
             FavoriteEpisode c = new()
             {
+                Id = id,
                 Season = season,
                 NumberWithInSeason = ep,
                 Title = name
@@ -45,7 +47,7 @@ public static class FavoriteEpisodesService
     {
         SqlConnection conn = new(constr);
         conn.Open();
-        string sql = $"Select * from Episodes where ID = {id}";
+        string sql = $"Select * from FavoriteEpisodes where ID = {id}";
         Console.WriteLine(sql);
         SqlCommand cmd = new(sql, conn);
         SqlDataReader dataReader = cmd.ExecuteReader();
@@ -57,6 +59,7 @@ public static class FavoriteEpisodesService
             string name = (string)dataReader.GetValue(3);
             FavoriteEpisode c = new()
             {
+                Id = id,
                 Season = season,
                 NumberWithInSeason = ep,
                 Title = name
