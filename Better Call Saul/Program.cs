@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Better_Call_Saul.Models;
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<BCSContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BCSContext")));
 
 // Add services to the container.
 
